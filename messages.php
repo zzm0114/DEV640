@@ -13,8 +13,9 @@ require_once 'header.php';
     {
       $pm   = substr(sanitizeString($_POST['pm']),0,1);
       $time = time();
+      $recip = ($_POST['st'])?sanitizeString($_POST['st']):$view;
       queryMysql("INSERT INTO messages VALUES(NULL, '$user',
-        '$view', '$pm', $time, '$text')");
+        '$recip', '$pm', $time, '$text')");
     }
   }
   if ($view != "")
@@ -36,6 +37,8 @@ require_once 'header.php';
           <input type='radio' name='pm' id='private' value='1'>
           <label for="private">Private</label>
         </fieldset>
+        <label for="sendTo">send to</label>
+        <input type='text' name='st' id='sendTo'>
         <textarea name='text'></textarea>
       <input data-transition='slide' type='submit' value='Post Message'>
     </form><br>
@@ -67,7 +70,36 @@ require_once 'header.php';
         else
           echo "whispered: <span class='whisper'>&quot;" .
             $row['message']. "&quot;</span> ";
+        if ($row['auth'] != $view)
+               echo "to you";
         if ($row['recip'] == $user)
+               echo "[<a href='messages.php?view=$view" .
+                  "&erase=" . $row['id'] . "'>erase</a>]";
+        echo "<br>";
+      }
+    }
+
+    $query  = "SELECT * FROM messages WHERE auth = '$view' and recip!='$view' ORDER BY time DESC";
+    $result = queryMysql($query);
+    $num    = $result->num_rows;
+
+    for ($j = 0 ; $j < $num ; ++$j)
+    {
+      $row = $result->fetch_array(MYSQLI_ASSOC);
+      if ($row['pm'] == 0 || $row['auth'] == $user ||
+          $row['recip'] == $user)
+      {
+        echo date('M jS \'y g:ia:', $row['time']);
+        echo " <a href='messages.php?view=" . $row['auth'] .
+             "'>" . $row['auth']. "</a> ";
+        if ($row['pm'] == 0)
+          echo "wrote: &quot;" . $row['message'] . "&quot; ";
+        else
+          echo "whispered: <span class='whisper'>&quot;" .
+            $row['message']. "&quot;</span> ";
+        if($row['recip'] != $view)
+            echo "to ". $row['recip'];
+        if ($row['auth'] == $user)
           echo "[<a href='messages.php?view=$view" .
                "&erase=" . $row['id'] . "'>erase</a>]";
         echo "<br>";
