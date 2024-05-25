@@ -67,3 +67,11 @@
    #used {
     margin-top:50px;
    }
+
+   .ui-input-text{
+    display: inline-block;
+   }
+
+   .ui-input-btn{
+    margin-left: auto;
+    }

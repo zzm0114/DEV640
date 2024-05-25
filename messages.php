@@ -29,6 +29,7 @@ require_once 'header.php';
     echo "<h3>$name1 Messages</h3>";
     showProfile($view);
     echo <<<_END
+    <div>
       <form method='post' action='messages.php?view=$view'>
         <fieldset data-role="controlgroup" data-type="horizontal">
           <legend>Type here to leave a message</legend>
@@ -37,11 +38,14 @@ require_once 'header.php';
           <input type='radio' name='pm' id='private' value='1'>
           <label for="private">Private</label>
         </fieldset>
-        <label for="sendTo">send to</label>
-        <input type='text' name='st' id='sendTo'>
+        <label style="display:inline-block">Send to</label>
+        <input type='text' name='st' id='sendTo' placeholder="yourself">
         <textarea name='text'></textarea>
+        <div style="display:flex">
       <input data-transition='slide' type='submit' value='Post Message'>
+      </div>
     </form><br>
+    </div>
  _END;
 
     date_default_timezone_set('UTC');
@@ -81,9 +85,9 @@ require_once 'header.php';
 
     $query  = "SELECT * FROM messages WHERE auth = '$view' and recip!='$view' ORDER BY time DESC";
     $result = queryMysql($query);
-    $num    = $result->num_rows;
+    $num2    = $result->num_rows;
 
-    for ($j = 0 ; $j < $num ; ++$j)
+    for ($j = 0 ; $j < $num2 ; ++$j)
     {
       $row = $result->fetch_array(MYSQLI_ASSOC);
       if ($row['pm'] == 0 || $row['auth'] == $user ||
@@ -106,10 +110,11 @@ require_once 'header.php';
       }
     }
   }
-  if (!$num)
+  if (!$num && !$num2)
     echo "<br><span class='info'>No messages yet</span><br><br>";
-  echo "<br><a data-role='button'
-        href='messages.php?view=$view'>Refresh messages</a>";
+  echo "<div style='display: flex;'>
+        <a  style='width:50%; margin: auto; margin-top:30px' data-role='button'
+        href='messages.php?view=$view'>Refresh messages</a></div>";
  ?>
     </div><br>
   </body>
