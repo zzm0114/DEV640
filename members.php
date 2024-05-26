@@ -57,12 +57,12 @@
     if (($t1 + $t2) > 1) echo " &harr; is a mutual friend";
     elseif ($t1)         echo " &larr; you are following";
     elseif ($t2)       { echo " &rarr; is following you";
-                         $follow = "recip"; }
+                         $follow = "follow back"; }
 
     if (!$t1) echo " [<a data-transition='slide'
       href='members.php?add=" . $row['user'] . "'>$follow</a>]";
     else      echo " [<a data-transition='slide'
-      href='members.php?remove=" . $row['user'] . "'>drop</a>]";
+      href='members.php?remove=" . $row['user'] . "'>unfollow</a>]";
   }
   ?>
     </ul></div>

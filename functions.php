@@ -1,8 +1,8 @@
 <?php
   $dbhost  = 'localhost';    // Unlikely to require changing
-  $dbname  = 'robinsnest';   // Modify these...
-  $dbuser  = 'admin';   // ...variables according
-  $dbpass  = '';   // ...to your installation
+  $dbname  = 'dev640';   // Modify these...
+  $dbuser  = 'root';   // ...variables according
+  $dbpass  = 'mysql';   // ...to your installation
   $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
   if ($connection->connect_error) die("Fatal Error");
   function createTable($name, $query)

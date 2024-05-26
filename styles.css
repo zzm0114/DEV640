@@ -20,8 +20,8 @@
    }
    .username {
     text-align :center;
-    background :#eb8;
-    color      :#40d;
+    background :rgb(195, 115, 115);
+    color      :rgb(249, 239, 237);
     font-family:helvetica;
     font-size  :20pt;
     padding    :4px;
@@ -38,10 +38,10 @@
     font-weight:bold;
    }
    .taken, .error {
-    color:red;
+    color:rgb(176, 65, 65);
    }
    .available {
-    color:green;
+    color:rgb(9, 110, 9);
    }
    .whisper {
     font-style:italic;
@@ -51,10 +51,10 @@
     font-family:Georgia;
     font-weight:bold;
     font-style :italic;
-    font-size  :97px;
-    color      :red;
+    font-size  :90px;
+    color      :rgb(220, 80, 80);
     }
-   #robin {
+   #TeamingUp {
     position          :relative;
     border            :0px;
     margin-left       :-6px;
@@ -63,6 +63,8 @@
     -moz-box-shadow   :0px 0px 0px;
     -webkit-box-shadow:0px 0px 0px;
     box-shadow        :0px 0px 0px;
+    width             : 100px;
+    height            : auto;
    }
    #used {
     margin-top:50px;
@@ -74,4 +76,10 @@
 
    .ui-input-btn{
     margin-left: auto;
+    }
+
+   p.author {
+    font-style :italic;
+    margin     :10px 0px;
+    text-align :center;
     }

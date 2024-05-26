@@ -28,13 +28,13 @@
   else $loggedin = FALSE;
 
  echo <<<_MAIN
-    <title>Robin's Nest: $userstr</title>
+    <title>TeamingUp: $userstr</title>
   </head>
   <body>
   <div data-role='page'>
     <div data-role='header'>
       <div id='logo' 
-        class='center'>R<img id='robin' src='robin.png'>bin's Nest</div>
+        class='center'><img id='TeamingUp' src='TeamingUp.png'>TeamingUp</div>
       <div class='username'>$userstr</div>
     </div>
     <div data-role='content'>
@@ -71,7 +71,7 @@ echo <<<_GUEST
         <a data-role='button' data-inline='true' data-icon='check'
           data-transition="slide" href='login.php'>Log In</a>
       </div>
-      <p class='info'>(You must be logged in to use this app)</p>
+      <p class='info'></p>
       
 _GUEST;
 }
