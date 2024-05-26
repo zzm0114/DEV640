@@ -9,6 +9,7 @@
       </div>
       <div data-role="footer">
         <h4>Web-Based Social Networking App by Team Red</h4>
+        <p class="author">Version 1.0.0</p>
         <p class="author">Authors: Zheming, Zhen, Yuntong, Tanh</p>
       </div>
     </body>
