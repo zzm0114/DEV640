@@ -10,6 +10,7 @@
     if ($result->num_rows)
          queryMysql("UPDATE profiles SET text='$text' where user='$user'");
     else queryMysql("INSERT INTO profiles VALUES('$user', '$text')");
+    echo "<script type='text/javascript'>alert('Profile has been updated successfully');</script>";
   }
   else
   {
@@ -61,6 +62,7 @@
     imagejpeg($tmp, $saveto);
     imagedestroy($tmp);
     imagedestroy($src);
+    echo "<script type='text/javascript'>alert('Picture has been updated successfully');</script>";
   }
 }
 showProfile($user);

@@ -1,4 +1,4 @@
-<?php // 
+<?php 
   session_start();
   
  echo <<<_INIT
@@ -43,14 +43,15 @@ _MAIN;
 
 if ($loggedin)
 {
+          // <a data-role='button' data-inline='true' data-icon='home'
+        //   data-transition="slide" href='members.php?view=$user'>Home</a>
 echo <<<_LOGGEDIN
       <div class='center'>
-        <a data-role='button' data-inline='true' data-icon='home'
-          data-transition="slide" href='members.php?view=$user'>Home</a>
+
         <a data-role='button' data-inline='true'
           data-transition="slide" href='members.php'>Members</a>
         <a data-role='button' data-inline='true'
-          data-transition="slide" href='friends.php'>Friends</a>
+          data-transition="slide" href='friends.php'>Friend List</a>
         <a data-role='button' data-inline='true'
           data-transition="slide" href='messages.php'>Messages</a>
         <a data-role='button' data-inline='true'

@@ -16,6 +16,7 @@ require_once 'header.php';
       $recip = ($_POST['st'])?sanitizeString($_POST['st']):$view;
       queryMysql("INSERT INTO messages VALUES(NULL, '$user',
         '$recip', '$pm', $time, '$text')");
+      echo "<script type='text/javascript'>alert('Message sent successfully');</script>";
     }
   }
   if ($view != "")
@@ -77,9 +78,10 @@ require_once 'header.php';
         if ($row['auth'] != $view)
                echo "to you";
         if ($row['recip'] == $user)
-               echo "[<a href='messages.php?view=$view" .
-                  "&erase=" . $row['id'] . "'>erase</a>]";
+               echo "<a data-role='button' style = 'display:inline' href='messages.php?view=$view" .
+                  "&erase=" . $row['id'] . "'>erase</a>";
         echo "<br>";
+        echo '<div class="separator"></div>';
       }
     }
 
@@ -104,9 +106,10 @@ require_once 'header.php';
         if($row['recip'] != $view)
             echo "to ". $row['recip'];
         if ($row['auth'] == $user)
-          echo "[<a href='messages.php?view=$view" .
-               "&erase=" . $row['id'] . "'>erase</a>]";
+          echo "<a data-role='button' style = 'display:inline' href='messages.php?view=$view" .
+               "&erase=" . $row['id'] . "'>erase</a>";
         echo "<br>";
+        echo '<div class="separator"></div>';
       }
     }
   }
