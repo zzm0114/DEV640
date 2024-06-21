@@ -19,6 +19,24 @@ require_once 'header.php';
       echo "<script type='text/javascript'>alert('Message sent successfully');</script>";
     }
   }
+
+  if (isset($_GET['keyword'])) {
+    $keyword = sanitizeString($_GET['keyword']);
+  }
+
+  if (isset($_GET['friend'])) {
+    $friend = sanitizeString($_GET['friend']);
+  }
+
+  if (isset($_GET['receiver'])) {
+    $receiver = sanitizeString($_GET['receiver']);
+  }
+
+  if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+    $start_date = $_GET['start_date'];
+    $end_date = $_GET['end_date'];
+  }
+
   if ($view != "")
   {
     if ($view == $user) $name1 = $name2 = "Your";
@@ -47,6 +65,25 @@ require_once 'header.php';
       </div>
     </form><br>
     </div>
+    <div style="display:flex;flex-direction: row;align-items: center;">
+    <form method='get' action='messages.php?view=$view'>
+      <div style="display:flex;flex-direction: row;align-items: center;">
+        <input style = 'display:inline;' type="text" name="sender" placeholder="Search for Sender">
+        <input style = 'display:inline' type="text" name="receiver" placeholder="Search for Recipient">
+        <input style = 'display:inline' type="text" name="keyword" placeholder="Search for Message">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+        <input style = 'display:inline' type="submit" value="Search" data-role='button' >
+        
+      </div>
+
+    </form>
+    <form method='post' action='messages.php?view=$view'>
+    <input style = 'display:inline' type="submit" value="Clear" data-role='button' >
+  </form>
+    </div>
  _END;
 
     date_default_timezone_set('UTC');
@@ -57,10 +94,38 @@ require_once 'header.php';
       queryMysql("DELETE FROM messages WHERE id=$erase AND recip='$user'");
     }
 
-    $query  = "SELECT * FROM messages WHERE recip='$view' ORDER BY time DESC";
+    $keywordConstraint = "";
+    $dateConstraint = "";
+    $senderConstraint = "";
+    $friendConstraint = "";
+
+    if (isset($_GET['keyword'])) {
+      $keyword = sanitizeString($_GET['keyword']);
+      $keywordConstraint = "and message like '%$keyword%'";
+    }
+
+    if (isset($_GET['sender'])) {
+      $sender = sanitizeString($_GET['sender']);
+      $senderConstraint = "and auth like '%$sender%'";
+    }
+
+    if (isset($_GET['receiver'])) {
+      $receiver = sanitizeString($_GET['receiver']);
+      $friendConstraint = "and recip like '%$receiver%'";
+    }
+
+    
+  if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+    $start_date = strtotime($_GET['start_date']);
+    $end_date = strtotime($_GET['end_date']);
+    if($end_date>=$start_date)$dateConstraint = "and time between '$start_date' and '$end_date' ";
+  }
+    
+
+    $query  = "SELECT * FROM messages WHERE recip='$view' $keywordConstraint $dateConstraint $senderConstraint $friendConstraint ORDER BY time DESC";
     $result = queryMysql($query);
     $num    = $result->num_rows;
-
+    
     for ($j = 0 ; $j < $num ; ++$j)
     {
       $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -85,7 +150,7 @@ require_once 'header.php';
       }
     }
 
-    $query  = "SELECT * FROM messages WHERE auth = '$view' and recip!='$view' ORDER BY time DESC";
+    $query  = "SELECT * FROM messages WHERE auth = '$view' and recip!='$view' $keywordConstraint $dateConstraint $senderConstraint $friendConstraint ORDER BY time DESC";
     $result = queryMysql($query);
     $num2    = $result->num_rows;
 
@@ -109,7 +174,6 @@ require_once 'header.php';
           echo "<a data-role='button' style = 'display:inline' href='messages.php?view=$view" .
                "&erase=" . $row['id'] . "'>erase</a>";
         echo "<br>";
-        echo '<div class="separator"></div>';
       }
     }
   }
