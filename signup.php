@@ -43,21 +43,21 @@ _END;
   }
  echo <<<_END
       <form method='post' action='signup.php'>$error
-      <div data-role='fieldcontain'>
+      <div data-role='fieldcontain' style="width: 600px; margin: 0 auto; text-align: center;">
         <label></label>
         Please enter your details to sign up
       </div>
-      <div data-role='fieldcontain'>
+      <div data-role='fieldcontain' style="width: 600px; margin: 0 auto; text-align: center;">
         <label>Username</label>
         <input type='text' maxlength='16' name='user' value='$user'
           onBlur='checkUser(this)'>
         <label></label><div id='used'>&nbsp;</div>
       </div>
-      <div data-role='fieldcontain'>
+      <div data-role='fieldcontain' style="width: 600px; margin: 0 auto; text-align: center;">
         <label>Password</label>
         <input type='text' maxlength='16' name='pass' value='$pass'>
       </div>
-      <div data-role='fieldcontain'>
+      <div data-role='fieldcontain' style="width: 600px; margin: 0 auto; text-align: center;">
       <label></label>
       <input data-transition='slide' type='submit' value='Sign Up'>
     </div>

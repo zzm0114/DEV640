@@ -91,7 +91,7 @@ require_once 'header.php';
     if (isset($_GET['erase']))
     {
       $erase = sanitizeString($_GET['erase']);
-      queryMysql("DELETE FROM messages WHERE id=$erase AND recip='$user'");
+      queryMysql("DELETE FROM messages WHERE id=$erase ");
     }
 
     $keywordConstraint = "";
@@ -143,7 +143,7 @@ require_once 'header.php';
         if ($row['auth'] != $view)
                echo "to you";
         if ($row['recip'] == $user)
-               echo "<a data-role='button' style = 'display:inline' href='messages.php?view=$view" .
+               echo "<a data-role='button' style = 'display:inline-block; padding: 6px 10px; font-size: 12px; margin: 0 auto; text-align: center; vertical-align: middle;' href='messages.php?view=$view" .
                   "&erase=" . $row['id'] . "'>erase</a>";
         echo "<br>";
         echo '<div class="separator"></div>';
@@ -171,7 +171,7 @@ require_once 'header.php';
         if($row['recip'] != $view)
             echo "to ". $row['recip'];
         if ($row['auth'] == $user)
-          echo "<a data-role='button' style = 'display:inline' href='messages.php?view=$view" .
+          echo "<a data-role='button' style = 'display:inline-block; padding: 6px 10px; font-size: 12px; margin: 0 auto; text-align: center; vertical-align: middle;' href='messages.php?view=$view" .
                "&erase=" . $row['id'] . "'>erase</a>";
         echo "<br>";
       }
