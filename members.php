@@ -59,10 +59,10 @@
     elseif ($t2)       { echo " &rarr; is following you";
                          $follow = "follow back"; }
 
-    if (!$t1) echo " [<a data-transition='slide'
-      href='members.php?add=" . $row['user'] . "'>$follow</a>]";
-    else      echo " [<a data-transition='slide'
-      href='members.php?remove=" . $row['user'] . "'>unfollow</a>]";
+    if (!$t1) echo " <a data-transition='slide' data-role='button' style = 'display:inline-block; padding: 6px 12px; font-size: 14px; margin: 3px; text-align: center; vertical-align: middle;'
+      href='members.php?add=" . $row['user'] . "'>$follow</a>";
+    else      echo " <a data-transition='slide' data-role='button' style = 'display:inline-block; padding: 6px 12px; font-size: 14px; margin: 3px; text-align: center; vertical-align: middle;'
+      href='members.php?remove=" . $row['user'] . "'>unfollow</a>";
   }
   ?>
     </ul></div>
